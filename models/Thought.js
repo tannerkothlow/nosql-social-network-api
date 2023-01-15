@@ -1,4 +1,4 @@
-const { Schema, Types, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new Schema(
@@ -12,7 +12,9 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now(),
-            // TODO: Add getter method to format the timestamp
+            get: (date) => {
+                if (date) return date.toISOString();
+            }, 
         },
         username: {
             type: String,
@@ -23,9 +25,10 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true,
         }
     }
-)
+);
 
 thoughtSchema
     .virtual('reactionCount')

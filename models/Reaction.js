@@ -18,9 +18,17 @@ const reactionSchema = new Schema (
         createdAt: {
             type: Date,
             default: Date.now(),
-            // TODO: Add getter method to format the timestamp
+            get: (date) => {
+                if (date) return date.toISOString();
+            }, 
         }
+    },
+    {
+        toJSON: {
+            getters: true,
+        },
+        id: false,
     }
-)
+);
 
 module.exports = reactionSchema;
