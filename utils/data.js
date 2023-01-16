@@ -9,7 +9,7 @@ const thoughtSeeds = [
     {
         thoughtText: "here's a cool thought",
         username: "testguy1",
-        userId: "1"
+        userId: "63c58d77510ae8c992e4a2e3"
     }
 ];
 
