@@ -21,7 +21,19 @@ router.get('/:thoughtId', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        // Create a new thought based on the example data's format
+        const newThought = await Thought.create({
+            thoughtText: req.body.thoughtText,
+            username: req.body.username,
+            userId: req.body.userId
+        });
+
+        const addThoughtToUser = await User.findOneAndUpdate(
+            { _id: req.body.userId },
+            { $addToSet: { thoughts: newThought._id }},
+            { runValidators: true, new: true }
+        );
+
+        res.status(200).json(newThought);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -29,7 +41,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:thoughtId', async (req, res) => {
     try {
-        // Update a thought by it's _id
+        const updateThought = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        );
+        res.status(200).json(updateThought);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -37,7 +54,10 @@ router.put('/:thoughtId', async (req, res) => {
 
 router.delete('/:thoughtId', async (req, res) => {
     try {
-        // Delete a thought by it's _id
+        const deleteThought = await Thought.findOneAndRemove(
+            { _id: req.params.thoughtId }
+        );
+        res.status(200).json({ message: `Thought ID ${req.params.thoughtId} deleted.`})
     } catch (err) {
         res.status(500).json(err);
     }
