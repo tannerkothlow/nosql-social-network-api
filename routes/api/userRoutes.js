@@ -106,7 +106,7 @@ router.delete('/:userId/friends/:friendId', async (req, res) => {
         const removeFriend = await User.findOneAndUpdate(
             { _id: req.params.userId },
             { $pull: { friends: req.params.friendId } },
-            { runValidators: true, new: true }
+            { new: true }
         );
         if (removeFriend) {
             res.status(200).json({ message: `Friend with ID of ${req.params.friendId} removed from User ${req.params.userId} friend list.`})

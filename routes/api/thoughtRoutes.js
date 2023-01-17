@@ -65,7 +65,15 @@ router.delete('/:thoughtId', async (req, res) => {
 
 router.post('/:thoughtId/reactions', async (req, res) => {
     try {
-        // Create a reaction stored in a thought's reaction array
+        const newReaction = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: {
+                reactionBody: req.body.reactionBody,
+                username: req.body.username
+            } } },
+            { runValidators: true, new: true }
+        );
+        res.status(200).json(newReaction);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -73,7 +81,14 @@ router.post('/:thoughtId/reactions', async (req, res) => {
 
 router.delete('/:thoughtId/reactions/:reactionId', async (req, res) => {
     try {
-        // Remove a reaction from a thought's reaction array based on reactionId
+        const deleteReaction = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { new: true }
+        );
+        if (deleteReaction) {
+            res.status(200).json({ message: `Reaction ID ${req.params.reactionId} removed from Thought ID ${req.params.thoughtId}`})
+        }
     } catch (err) {
         res.status(500).json(err);
     }
