@@ -4,6 +4,10 @@
 
 For our 18th week in our coding bootcamp, we were tasked with creating a simple, but powerful express.js hosted backend for a hypothetical social network using Mongoose. Creating an application backend is nothing new at this point, but the main point of the exercise was to get a hold on how Mongoose works and how to preform CRUD operations.
 
+A nice and simple project to get us used to the syntax of Mongoose. There were no real massive hurdles when building this app, an api rich backend dealing with databases is more than familiar by this point. My brain practically went into Sequelize Autopilot mode making the appropriate models and routes, occasionally taking a moment to appreciate how Mongoose is just *that* much better as a dev expirience.
+
+Making the models went off without a hitch, whether from expirience of making models for a number of database structures or how air tight Monboogse is. When it came to making the routes the GET's and GET by ID's were no problem, and I really liked how Mongoose handles updating data in a collection. The format of `{ _id: } { $set or $addToSet or $pull }` was very smooth, and managing the Reaction subdoc within Thoughts couldn't have been easier. A very painless expirience all around!
+
 ## Installation and Testing
 
 To download the app, clone this repo to your machine and run `npm i` to download all relevant dependencies.
