@@ -12,13 +12,49 @@ To test the various routes, run `npm run start` and make requests to `http://loc
 
 ## Usage
 
-- User Routes
+- To get all user in the database, make a GET request to `./users`
 
-- Friend Routes
+- To retrieve a particular user's data, make a GET request to `./users/:userId`
 
-- Thought Routes
+![all-users](./project/images/get-all-users.PNG)
 
-- Reaction Routes
+- To create a new user, POST a JSON object formatted like the example to `./users`
+
+![new-user](./project/images/new-user.PNG)
+
+- PUT requests require a JSON object identical to a POST, but must be made to `./users/:userId`
+
+- DELETE requests are made to `./users/:userId` and will cascade the deletion to that user's thoughts as well.
+
+- To add a user to another user's friends array, make a POST request to `./users/:userId/friends/:friendId` where userId is the one having it's array updated, and friendId is the friend being added.
+
+- To remove a user from another's friend array, make a DELETE request to the same URL where userId is the user who's friends list will be updated, and friendId is the user who will be removed.
+
+![add-friend](./project/images/add-friend-route.PNG)
+
+- To get all thoughts in the database, make a GET request to `./thoughts`
+
+- To get a specific thought by ID, make a GET request to `./thoughts/:thoughtId`
+
+![all-thoughts](./project/images/get-all-thoughts.PNG)
+
+- To create a new thought, make a POST request with a JSON object formatted like the example to `./thoughts`
+
+![new-thought](./project/images/new-thought.PNG)
+
+- PUT requests are made to `./thoughts/:thoughtId` with a JSON object formatted identical to a POST request.
+
+- DELETE requests are made to `./thoughts/:thoughtId` and will delete the appropriate thought and all associated reactions.
+
+- To add a reaction to a thought, POST a JSON object formatted like the example to that thought's reaction URL.
+
+![new-reaction](./project/images/add-reaction.PNG)
+
+- To remove that reaction, make a DELETE request to that reaction's URL.
+
+![delete-reaction](./project/images/delete-reaction.PNG)
+
+You can also view a demo of all the routes [here.](https://drive.google.com/file/d/1_JGzzru4fWxakXzdj-xf8BrlvQv5lGaV/view?usp=sharing)
 
 ## License
 
